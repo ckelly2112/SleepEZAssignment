@@ -1,3 +1,33 @@
+<div id="searchSection">
+    <h1>Book Now!</h1>
+    <section class="search" id="bookingHome">
+        <h2>Book anywhere in Canada <br>as long as it's in these four great cities!</h2>
+
+        <form method="POST" action="/home">
+            <label>City:</label><br>
+            <select name="searchCity">
+                <option value="Toronto">Toronto</option>
+                <option value="Vancouver">Vancouver</option>
+                <option value="Montreal">Montreal</option>
+                <option value="St. John's">St. John's</option>
+            </select>
+            <div id="checkContainer">
+                <div id="checkIn">
+                    <label>Check In Date</label><br>
+                    <input type="date" name="checkInDate" value="2019-10-07" min="2019-10-07">
+                </div>
+                <div id="checkOut">
+                    <label>Check Out Date</label><br>
+                    <input type="date" name="checkOutDate" value="2019-10-07" min="2019-10-07">
+                </div>
+            </div>
+            <label>Number of Guests:</label><br>
+            <input type="number" name="numberOfGuests" min="1" max="9">
+            <br><br>
+            <input type="submit" name="submitSearch" value="Search">
+        </form>
+    </section>
+</div>
 <section class="promo">
     <div class="backgroundImage" id="promoImage"> </div>
     <div>
@@ -8,32 +38,6 @@
     </div>
 </section>
 <div>
-<section class="search" id="bookingHome">
-    <h2>Book anywhere in Canada <br>as long as it's in these four great cities!</h2>
-    
-    <form method="POST" action="/home">
-        <label>City:</label><br>
-        <select name="searchCity">
-            <option value="Toronto">Toronto</option>
-            <option value="Vancouver">Vancouver</option>
-            <option value="Montreal">Montreal</option>
-            <option value="St. John's">St. John's</option>
-        </select>
-        <div id="checkContainer">
-            <div id="checkIn">
-                <label>Check In Date</label><br>
-                <input type="date" name="checkInDate" value="2019-10-07" min="2019-10-07">
-            </div>
-            <div id="checkOut">
-                <label>Check Out Date</label><br>
-                <input type="date" name="checkOutDate" value="2019-10-07" min="2019-10-07">
-            </div>
-        </div>
-        <label>Number of Guests:</label><br>
-        <input type="number" name="numberOfGuests" min="1" max="9">
-        <br><br>
-        <input type="submit" name="submitSearch" value="Search">
-    </form>
-</section>
+
 
 </div>

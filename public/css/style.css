@@ -23,7 +23,7 @@ a:hover{
 {
     width: 100%;
     height: 100%;
-    background-position: bottom;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     opacity: 0.3;
@@ -35,6 +35,10 @@ a:hover{
 }
 
 #promoImage
+{
+    background-image: url(../img/beach.jpg)
+}
+#registrationBackground
 {
     background-image: url(../img/cottageLife.jpg)
 }
@@ -114,4 +118,42 @@ footer i
 {
     display: grid;
     grid-template-columns: 1fr 1fr 4fr;
+}
+.search label{
+    color: brown;
+    font-weight: bold;
+}
+#searchSection
+{
+    height: 70vh;
+    position: relative;
+    background-image: url(../img/cozyRoom.jpg);
+    padding-bottom: 1rem;
+}
+#searchSection h1
+{
+    color: brown;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* USER REGISTRATION SETTINGS */
+
+#registrationForm
+{
+    position: relative;
+    padding: .5rem;
+    margin: 1rem 70% 1rem 10vh;
+    background-color: white;
+    border-style: solid;
+    font-weight: bold;
+}
+
+#userRegistration
+{
+    height: 70vh;
+    position: relative;
+    /* background-image: url(../img/cottageLife.jpg); */
+    padding-bottom: 1rem;
+    
 }
