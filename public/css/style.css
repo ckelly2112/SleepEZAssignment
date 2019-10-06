@@ -2,9 +2,15 @@
 {
     margin: 0;
     padding: 0;
-    
+
 }
 /* Defaults */
+.errorMessages
+{
+    background-color: red;
+    font-weight: bold;
+
+}
 body
 {
     background-color: silver;
@@ -26,21 +32,28 @@ a:hover{
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    opacity: 0.3;
     z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
+    opacity: 0.5;
+
 
 }
 
 #promoImage
 {
-    background-image: url(../img/beach.jpg)
+    background-image: url(../img/beach.jpg);
+
 }
 #registrationBackground
 {
-    background-image: url(../img/cottageLife.jpg)
+    background-image: url(../img/cottageLife.jpg);
+
+}
+#infoBack
+{
+    background-image: url(../img/mountains.jpg);
 }
 
 /* MAIN HEADER DEFAULTS */
@@ -49,7 +62,7 @@ header
     display: grid;
     background-color: brown;
     padding: 6px 12px;
-    grid-template-columns: 1fr 4fr; 
+    grid-template-columns: 1fr 4fr;
 
 }
 header > img{
@@ -133,7 +146,7 @@ footer i
 #searchSection h1
 {
     color: brown;
-    text-align: center;
+    padding-left: 10vh;
     font-weight: bold;
 }
 
@@ -151,9 +164,69 @@ footer i
 
 #userRegistration
 {
-    height: 70vh;
+    height: 90vh;
     position: relative;
-    /* background-image: url(../img/cottageLife.jpg); */
     padding-bottom: 1rem;
-    
+}
+#userRegistration h1
+{
+    padding-left: 10vh;
+}
+
+.roomListing
+{
+    height: 80vh;
+    padding: 1rem 20vh 1rem 20vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#room1 {
+    border-style: block;
+    border-color: gold;
+    border-width: 2px;
+}
+.roomListing img
+{
+    height: 200px;
+    width: 400px;
+}
+
+/* Tutorial Video */
+.information
+{
+    position: relative;
+    padding: 2rem 2rem;
+}
+.information h2
+{
+    text-align: center;
+}
+.video
+{
+    padding: 1rem 10%;
+    text-align: center;
+}
+
+/* Testimony */
+#testimony
+{
+    padding: 1rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+#testimony p
+{
+    padding: 2rem 1rem;
+    font-size: 20px;
+    background-color: white;
+    border-style: solid;
+    margin: 1rem;
+    margin-right: 50%;
+
+}
+#testimony img
+{
+    height: 200;
+    width: 320;
+    padding: 1rem;
 }

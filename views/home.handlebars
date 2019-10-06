@@ -1,9 +1,15 @@
+{{#each error}}
+<div class="errorMessages">{{this}}</div>
+{{/each}}
+{{#each register}}
+<h2>Registration success! Welcome {{this}}!</h2>
+{{/each}}
 <div id="searchSection">
     <h1>Book Now!</h1>
     <section class="search" id="bookingHome">
         <h2>Book anywhere in Canada <br>as long as it's in these four great cities!</h2>
 
-        <form method="POST" action="/home">
+        <form method="POST" action="/">
             <label>City:</label><br>
             <select name="searchCity">
                 <option value="Toronto">Toronto</option>
@@ -14,7 +20,7 @@
             <div id="checkContainer">
                 <div id="checkIn">
                     <label>Check In Date</label><br>
-                    <input type="date" name="checkInDate" value="2019-10-07" min="2019-10-07">
+                    <input type="date" name="checkInDate" value="2019-10-07" <!--min="2019-10-07"-->>
                 </div>
                 <div id="checkOut">
                     <label>Check Out Date</label><br>
@@ -28,6 +34,42 @@
         </form>
     </section>
 </div>
+<section class="information">
+    <div class="backgroundImage" id="infoBack"></div>
+    <h2>Who we are</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <br><br>
+    <h3>Testimonials:</h3>
+    <div id="testimony">
+        <div>
+            <img src="img/oldperson1.jpg" alt="Bobby">
+            <br>
+            <p>
+                <b>Bobby</b>: Amazing!
+            </p>
+        </div>
+        <div>
+            <img src="img/oldpeople2.jpg" alt="Lots Of Old People">
+            <br>
+            <p>
+                <b>Ernest</b>: Easy to use and great for groups!
+            </p>
+        </div>
+        <div>
+            <img src="img/oldpeople3.jpg" alt="Laughing old people">
+            <br>
+            <p>
+                <b>Louise</b>: Since Henry passed away I have never been busier!<br> SleepEZ makes it so much Ezer!
+            </p>
+        </div>
+    </div>
+    <div class="video">
+    <h2>Confused? Relax! LearnEZ!</h2>
+    <video width="768" height="432" controls>
+        <source src="media/Tutorial.mp4" type="video/MP4">
+    </video>
+    </div>
+</section>
 <section class="promo">
     <div class="backgroundImage" id="promoImage"> </div>
     <div>
