@@ -5,6 +5,11 @@
 
 }
 /* Defaults */
+h1, h2, h3
+{
+    color: navy;
+    font-weight: bold;
+}
 .errorMessages
 {
     background-color: red;
@@ -23,6 +28,7 @@ a
 }
 a:hover{
     text-decoration: underline;
+    color: brown;
 }
 /* Background images */
 .backgroundImage
@@ -40,7 +46,11 @@ a:hover{
 
 
 }
+#searchBackground
+{
+    background-image: url(../img/cozyRoom.jpg);
 
+}
 #promoImage
 {
     background-image: url(../img/beach.jpg);
@@ -60,9 +70,11 @@ a:hover{
 header
 {
     display: grid;
-    background-color: brown;
+    background-color: white;
     padding: 6px 12px;
     grid-template-columns: 1fr 4fr;
+    border-bottom: solid;
+    border-color: red;
 
 }
 header > img{
@@ -73,6 +85,7 @@ nav
 {
     text-align: right;
     padding: 20px;
+    color: red;
 }
 nav ul li
 {
@@ -87,6 +100,7 @@ nav ul li
     padding: .5rem;
     border-style: solid;
     border-width: 2px;
+    background-color: silver;
 
 }
 
@@ -123,7 +137,7 @@ footer i
     position: relative;
     padding: .5rem;
     margin: 1rem 70% 1rem 10vh;
-    background-color: white;
+    background-color: silver;
     border-style: solid;
 }
 
@@ -140,14 +154,20 @@ footer i
 {
     height: 70vh;
     position: relative;
-    background-image: url(../img/cozyRoom.jpg);
     padding-bottom: 1rem;
+    padding-top: 0;
 }
 #searchSection h1
 {
-    color: brown;
+    color: navy;
+    background-color: silver;
+    margin: 1rem 70% 1rem 10vh;
+    padding-bottom: 0;
     padding-left: 10vh;
     font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    text-align: left;
 }
 
 /* USER REGISTRATION SETTINGS */
@@ -157,7 +177,7 @@ footer i
     position: relative;
     padding: .5rem;
     margin: 1rem 70% 1rem 10vh;
-    background-color: white;
+    background-color: silver;
     border-style: solid;
     font-weight: bold;
 }
