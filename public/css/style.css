@@ -18,6 +18,7 @@ h1, h2, h3
 }
 body
 {
+    
     background-color: silver;
     font-family: 'Cabin', sans-serif;
 }
@@ -35,7 +36,7 @@ a:hover{
 {
     width: 100%;
     height: 100%;
-    background-position: center;
+    background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
     z-index: -1;
@@ -190,7 +191,15 @@ footer i
 }
 #userRegistration h1
 {
+    color: navy;
+    background-color: silver;
+    margin: 1rem 70% 1rem 10vh;;
+    padding-bottom: 0;
     padding-left: 10vh;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    text-align: left;
 }
 
 .roomListing
