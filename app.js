@@ -1,14 +1,24 @@
+//Port Configured
 const PORT = process.env.PORT || 3000;
+//API Keys are hidden here
+const config = require('./config.js')
+
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
+
+
 const app = express();
+
+//Cities temporarily stored here
 const result =[];
 const registered = [];
 
+//Handlebars setup
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+//Body Parser Setup
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static('public'))
 
