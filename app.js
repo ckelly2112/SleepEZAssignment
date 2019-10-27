@@ -6,6 +6,7 @@ const config = require('./config.js')
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
+const mongoose = require("mongoose");
 
 
 const app = express();
@@ -21,6 +22,9 @@ app.set('view engine', 'handlebars');
 //Body Parser Setup
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static('public'))
+
+//Mongoose db setup
+mongoose.connect(config.)
 
 // GET
 app.get('/', (req, res)=>{
