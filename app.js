@@ -13,7 +13,6 @@ const app = express();
 
 //Cities temporarily stored here
 const result =[];
-const registered = [];
 
 //Handlebars setup
 app.engine('handlebars', exphbs());
@@ -32,12 +31,12 @@ mongoose.connect(config.MongoDB, {useNewUrlParser: true, useUnifiedTopology: tru
     console.log(`ERROR: ${err}`)
 })
 
+//Login Schema
+
+
 // GET
 app.get('/', (req, res)=>{
-    res.render('home',
-    {
-        register: registered
-    })
+    res.render('home')
 })
 
 app.get('/roomList', (req, res)=>{
@@ -97,6 +96,21 @@ app.post("/", (req, res)=>
 })
 
 app.post('/userReg', (req, res)=>{
+    const Schema = mongoose.Schema;
+    const loginSchema = new Schema({
+        firstName : String,
+        lastName: String,
+        eMail:{
+            type: String,
+            unique: true
+        } ,
+        password: String,
+        DOB: Date
+    })
+
+
+    const Login = mongoose.model('Login', loginSchema);
+    //Server-side validation
     const errors =[];
     if (req.body.userEmail == ""){
         errors.push("You must enter an Email")
@@ -115,9 +129,28 @@ app.post('/userReg', (req, res)=>{
             error: errors
         })
     } else{
-        registered.pop();
-        registered.push(`${req.body.firstName}`)
-        res.redirect('/')
+        const loginData = {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            eMail: req.body.userEmail,
+            password: req.body.userPassword,
+            DOB: req.body.dateOfBirth
+        }
+        const saveLogin = new Login(loginData);
+        saveLogin.save({validateBeforeSave: true})
+        .then(()=>{
+            console.log(`${req.body.firstName} Saved in the database!`)
+            res.redirect('/')
+        })
+        .catch((err)=>{
+            console.log(`Save failed because: ${err}`);
+            errors.push("Email already in use!")
+            res.render('userReg', {
+                error: errors
+            })
+        })
+        
+        
     }
 
 })
