@@ -1,7 +1,7 @@
 //Port Configured
 const PORT = process.env.PORT || 3000;
 //API Keys are hidden here
-const config = require('./config.js')
+const config = require('./config')
 
 const express = require("express");
 const exphbs = require("express-handlebars");
@@ -24,7 +24,13 @@ app.use(bodyParser.urlencoded({ extended: false}));
 app.use(express.static('public'))
 
 //Mongoose db setup
-mongoose.connect(config.)
+mongoose.connect(config.MongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
+.then(()=>{
+    console.log(`Connection to database successful`)
+})
+.catch((err)=>{
+    console.log(`ERROR: ${err}`)
+})
 
 // GET
 app.get('/', (req, res)=>{
