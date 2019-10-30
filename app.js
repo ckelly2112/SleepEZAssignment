@@ -9,7 +9,15 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 
 
+
+
 const app = express();
+
+
+//SendGrid API
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(config.sendGrid);
+
 
 //Cities temporarily stored here
 const result =[];
@@ -32,13 +40,28 @@ mongoose.connect(config.MongoDB, {useNewUrlParser: true, useUnifiedTopology: tru
 })
 
 //Login Schema
+const Schema = mongoose.Schema;
+    const loginSchema = new Schema({
+        firstName : String,
+        lastName: String,
+        eMail:{
+            type: String,
+            unique: true
+        } ,
+        password: String,
+        DOB: Date
+    })
 
+
+    const Login = mongoose.model('Login', loginSchema);
 
 // GET
 app.get('/', (req, res)=>{
     res.render('home')
 })
-
+app.get('/dashboard', (req, res)=>{
+    res.render('dashboard')
+})
 app.get('/roomList', (req, res)=>{
     if(result == "Toronto"){
         res.render('roomList', {
@@ -96,20 +119,7 @@ app.post("/", (req, res)=>
 })
 
 app.post('/userReg', (req, res)=>{
-    const Schema = mongoose.Schema;
-    const loginSchema = new Schema({
-        firstName : String,
-        lastName: String,
-        eMail:{
-            type: String,
-            unique: true
-        } ,
-        password: String,
-        DOB: Date
-    })
-
-
-    const Login = mongoose.model('Login', loginSchema);
+    
     //Server-side validation
     const errors =[];
     if (req.body.userEmail == ""){
@@ -139,8 +149,22 @@ app.post('/userReg', (req, res)=>{
         const saveLogin = new Login(loginData);
         saveLogin.save({validateBeforeSave: true})
         .then(()=>{
-            console.log(`${req.body.firstName} Saved in the database!`)
-            res.redirect('/')
+            console.log(`${loginData.firstName} Saved in the database!`)
+            const email = {
+                to: loginData.eMail,
+                from: 'ckelly.tor@gmail.com',
+                subject: `Welcome aboard!`,
+                text: `Welcome aboard 1!`,
+                html: `Welcome aboard 2!`
+            }
+            sgMail.send(email)
+            .then(()=>{
+                console.log('Message sent Successfully!')
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            res.redirect('/dashboard');
         })
         .catch((err)=>{
             console.log(`Save failed because: ${err}`);
