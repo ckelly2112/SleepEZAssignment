@@ -94,6 +94,9 @@ app.get('/roomList', (req, res)=>{
 app.get('/userReg', (req, res)=>{
     res.render('userReg')
 })
+app.get('/login', (req, res)=>{
+    res.render('login')
+})
 
 // POST
 app.post("/", (req, res)=>
@@ -119,9 +122,26 @@ app.post("/", (req, res)=>
     }
 })
 
+app.post('/login', (req, res)=>{
+    const errors = [];
+    if (req.body.userEmail == ""){
+        errors.push(`You forgot to enter your email!`)
+    }
+    if (req.body.userPassword == ""){
+        errors.push(`You didn't enter your password!`)
+    }
+    if (errors.length >=1){
+        res.render('login',{
+            error: errors
+        })
+    } else{
+        res.redirect('/dashboard');
+    }
+})
+
 app.post('/userReg', (req, res)=>{
     
-    //Server-side validation
+    const validator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
     const errors =[];
     if (req.body.userEmail == ""){
         errors.push("You must enter an Email")
@@ -134,6 +154,12 @@ app.post('/userReg', (req, res)=>{
     }
     if (req.body.dateOfBirth >= '2001-10-07'){
         errors.push("Must be 18 or older to register!")
+    }
+    if (!validator.test(req.body.userPassword)){
+        errors.push(`Rules are as follows:`)
+        errors.push(`Password must have one lower case and one Upper case letter`)
+        errors.push(`Password must have at least one number`)
+        errors.push(`Password Length between 8 & 16 characters`)
     }
     if (errors.length >=1){
         res.render('userReg',{

@@ -4,13 +4,13 @@
 {{#each userData}}
 <h2>Registration success! Welcome {{this}}!</h2>
 {{/each}}
-<div id="searchSection">
+<section class="formSection">
     <div class="backgroundImage" id="searchBackground"></div>
-    <h1>Book Now!</h1>
-    <section class="search" id="bookingHome">
+    <h1 class="formTitle">Book Now!</h1>
+    <div class="formLayout" id="bookingHome">
         <h2>Book anywhere in Canada <br>as long as it's in these four great cities!</h2>
-
         <form method="POST" action="/">
+        <div id="searchForm">
             <label>City:</label><br>
             <select name="searchCity">
                 <option value="Toronto">Toronto</option>
@@ -32,9 +32,11 @@
             <input type="number" name="numberOfGuests" min="1" max="9">
             <br><br>
             <input type="submit" name="submitSearch" value="Search">
+        </div>
         </form>
-    </section>
-</div>
+
+    </div>
+</section>
 <section class="information">
     <div class="backgroundImage" id="infoBack"></div>
     <h2>Who we are</h2>
@@ -66,7 +68,7 @@
     </div>
     <div class="video">
     <h2>Confused? Relax! LearnEZ!</h2>
-    <video width="768" height="432" controls>
+    <video controls>
         <source src="media/Tutorial.mp4" type="video/MP4">
     </video>
     </div>

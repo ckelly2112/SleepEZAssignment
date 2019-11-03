@@ -67,13 +67,17 @@ a:hover{
 {
     background-image: url(../img/mountains.jpg);
 }
+#dashboardBackground
+{
+    background-image: url(../img/Calm.jpg);
+}
 
 /* MAIN HEADER DEFAULTS */
 header
 {
     display: grid;
     background-color: white;
-    padding: 6px 12px;
+    padding: 1rem 1rem;
     grid-template-columns: 1fr 4fr;
     border-bottom: solid;
     border-color: red;
@@ -86,7 +90,7 @@ header > img{
 nav
 {
     text-align: right;
-    padding: 20px;
+    padding: 1.5rem;
     color: red;
 }
 nav ul li
@@ -105,6 +109,7 @@ nav ul li
     background-color: silver;
 
 }
+
 
 /* Promotional Section */
 .promo
@@ -134,13 +139,25 @@ footer i
 
 /* Search Table */
 
-.search
+.formLayout
 {
     position: relative;
-    padding: .5rem;
-    margin: 1rem 70% 1rem 10vh;
+    padding: 1em;
+    margin-left: 10vh;
+    width: 300px;
     background-color: silver;
     border-style: solid;
+    border-color: black;
+    color: brown;
+}
+.formTitle
+{
+    display: inline-block;
+    padding: 1rem 10vh;
+}
+#searchForm
+{
+    position: relative;
 }
 
 #checkContainer
@@ -152,55 +169,26 @@ footer i
     color: brown;
     font-weight: bold;
 }
-#searchSection
+.formSection
 {
-    height: 70vh;
+    min-height: 50vh;
+    max-height: 100%;
     position: relative;
     padding-bottom: 1rem;
-    padding-top: 0;
+    padding-top: 1rem;
 }
-#searchSection h1
-{
-    color: navy;
-    background-color: silver;
-    margin: 1rem 70% 1rem 10vh;
-    padding-bottom: 0;
-    padding-left: 10vh;
-    font-weight: bold;
-    border-style: solid;
-    border-width: 2px;
-    text-align: left;
-}
+
 
 /* USER REGISTRATION SETTINGS */
 
-#registrationForm
-{
-    position: relative;
-    padding: .5rem;
-    margin: 1rem 70% 1rem 10vh;
-    background-color: silver;
-    border-style: solid;
-    font-weight: bold;
-}
 
 #userRegistration
 {
-    height: 90vh;
-    position: relative;
-    padding-bottom: 1rem;
+    min-height: 90vh;
 }
-#userRegistration h1
+#registrationForm
 {
-    color: navy;
-    background-color: silver;
-    margin: 1rem 70% 1rem 10vh;;
-    padding-bottom: 0;
-    padding-left: 10vh;
-    font-weight: bold;
-    border-style: solid;
-    border-width: 2px;
-    text-align: left;
+    text-align: center;
 }
 
 .roomListing
@@ -237,21 +225,28 @@ footer i
     text-align: center;
 }
 
+.dashBoard
+{
+    min-height: 90vh;
+    max-height: 100%;
+    position: relative;
+}
 /* Testimony */
 #testimony
 {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    text-align: center;
 }
 #testimony p
 {
-    padding: 2rem 1rem;
+    text-align: center;
+    padding: 1rem 1rem;
     font-size: 20px;
     background-color: white;
     border-style: solid;
-    margin: 1rem;
-    margin-right: 50%;
+    margin: 1rem 5rem;
 
 }
 #testimony img
@@ -259,4 +254,109 @@ footer i
     height: 200;
     width: 320;
     padding: 1rem;
+}
+video
+{
+    width: 768px;
+    height: 432px;
+}
+
+@media(max-width: 1024px)
+{
+    #testimony
+    {
+        display: block;
+        text-align: center;
+    }
+    #testimony p
+    {
+        display: block;
+        text-align: center;
+        padding: 3rem, 1rem;
+        margin: 0;
+        
+    }
+    video
+    {
+        display: block;
+        position: relative;
+        padding: 1rem;
+        height: auto;
+        width: 550px;
+    }
+    .roomListing
+    {
+        padding: 1rem;
+        display: block;
+        margin: 1rem;
+        position: relative;
+        height: 100%;
+        background-color: maroon;
+    }
+}
+
+@media(max-width: 600px)
+{
+   .formLayout
+   {
+       margin: 0;
+       padding: 0;
+       width: 90%;
+   } 
+   .formTitle
+   {
+       display: none;
+   }
+   video
+   {
+       margin: 0;
+       padding: 0;
+       position: relative;
+       width: 100%;
+       height: auto;
+   }
+   img
+   {
+       text-align: center;
+       height: auto;
+       width: 240px;
+   }
+   .information
+   {
+       margin: 0;
+       padding: 0;
+   }
+   nav
+   {
+       padding: 0;
+       margin: 0;
+       text-align: center;
+       display: block;
+       font-size: 12px;
+   }
+   header
+   {
+       text-align: center;
+        padding: 0;
+        margin: 0;
+        display: block;
+   }
+   nav ul li
+   {
+       display: block;
+       text-align: left;
+   }
+   .roomListing
+   {
+       margin: 0;
+       padding: 1rem;
+       width: 100%;
+   }
+   .rooms img
+   {
+       text-align: center;
+       width: 320px;
+       height: auto;
+   }
+   
 }
