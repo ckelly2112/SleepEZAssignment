@@ -3,10 +3,12 @@ const PORT = process.env.PORT || 3000;
 //API Keys are hidden here
 const config = require('./config')
 
+//Import Modules
 const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
+const sgMail = require('@sendgrid/mail')
 
 
 
@@ -15,7 +17,6 @@ const app = express();
 
 
 //SendGrid API
-const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(config.sendGrid);
 
 
@@ -152,10 +153,10 @@ app.post('/userReg', (req, res)=>{
             console.log(`${loginData.firstName} Saved in the database!`)
             const email = {
                 to: loginData.eMail,
-                from: 'ckelly.tor@gmail.com',
+                from: config.sendEmail,
                 subject: `Welcome aboard!`,
-                text: `Welcome aboard 1!`,
-                html: `Welcome aboard 2!`
+                text: `Welcome aboard!`,
+                html: `Thank you for creating an account with SleepEz!!!`
             }
             sgMail.send(email)
             .then(()=>{
