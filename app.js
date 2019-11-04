@@ -54,7 +54,7 @@ const Schema = mongoose.Schema;
     })
 
 
-    const Login = mongoose.model('Login', loginSchema);
+    const Register = mongoose.model('Register', loginSchema);
 
 // GET
 app.get('/', (req, res)=>{
@@ -173,7 +173,7 @@ app.post('/userReg', (req, res)=>{
             password: req.body.userPassword,
             DOB: req.body.dateOfBirth
         }
-        const saveLogin = new Login(loginData);
+        const saveLogin = new Register(loginData);
         saveLogin.save({validateBeforeSave: true})
         .then(()=>{
             console.log(`${loginData.firstName} Saved in the database!`)
