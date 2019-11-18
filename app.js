@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 const sgMail = require('@sendgrid/mail')
 const taskRoutes = require('./routes/task')
 
-
+require("dotenv").config({path:'./config/keys.env'});
 
 
 
@@ -39,7 +39,7 @@ app.use(express.static('public'))
 //Mongoose db setup
 mongoose.connect(config.MongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{
-    console.log(`Connection to database successful`)
+    console.log(`Connection to database successful`)    
 })
 .catch((err)=>{
     console.log(`ERROR: ${err}`)
