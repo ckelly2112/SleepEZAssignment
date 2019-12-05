@@ -18,7 +18,7 @@ router.post('/login', (req, res)=>{
             error: errors
         })
     } else{
-        res.redirect('task/dashboard');
+        res.redirect('/task/dashboard');
     }
 })
 

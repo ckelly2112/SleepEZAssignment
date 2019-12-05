@@ -100,22 +100,22 @@ mongoose.connect(process.env.MONGO_DB, {useNewUrlParser: true, useUnifiedTopolog
 //     }
 // })
 
-app.post('/login', (req, res)=>{
-    const errors = [];
-    if (req.body.userEmail == ""){
-        errors.push(`You forgot to enter your email!`)
-    }
-    if (req.body.userPassword == ""){
-        errors.push(`You didn't enter your password!`)
-    }
-    if (errors.length >=1){
-        res.render('login',{
-            error: errors
-        })
-    } else{
-        res.redirect('task/dashboard');
-    }
-})
+// app.post('/login', (req, res)=>{
+//     const errors = [];
+//     if (req.body.userEmail == ""){
+//         errors.push(`You forgot to enter your email!`)
+//     }
+//     if (req.body.userPassword == ""){
+//         errors.push(`You didn't enter your password!`)
+//     }
+//     if (errors.length >=1){
+//         res.render('login',{
+//             error: errors
+//         })
+//     } else{
+//         res.redirect('task/dashboard');
+//     }
+// })
 
 app.listen(PORT, ()=>{
     console.log(`Port ${PORT} now listening`)
