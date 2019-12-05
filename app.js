@@ -7,8 +7,8 @@ const express = require("express");
 const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
-const sgMail = require('@sendgrid/mail')
 const taskRoutes = require('./routes/task')
+const userRoutes = require('./routes/user')
 
 require("dotenv").config({path:'./config/keys.env'});
 
@@ -19,11 +19,9 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false}));
 
-
+//Routes
 app.use('/task', taskRoutes);
-//SendGrid API
-sgMail.setApiKey(process.env.SENDGRID);
-
+app.use('/user', userRoutes);
 
 //Cities temporarily stored here
 const result =[];
@@ -98,9 +96,9 @@ app.get('/roomList', (req, res)=>{
 // app.get('/userReg', (req, res)=>{
 //     res.render('userReg')
 // })
-app.get('/login', (req, res)=>{
-    res.render('login')
-})
+// app.get('/login', (req, res)=>{
+//     res.render('login')
+// })
 
 // POST
 app.post("/", (req, res)=>
@@ -139,7 +137,7 @@ app.post('/login', (req, res)=>{
             error: errors
         })
     } else{
-        res.redirect('/dashboard');
+        res.redirect('task/dashboard');
     }
 })
 
