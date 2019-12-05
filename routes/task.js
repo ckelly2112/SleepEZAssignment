@@ -49,7 +49,7 @@ router.post('/userReg', (req, res)=>{
             console.log(`${loginData.firstName} Saved in the database!`)
             const email = {
                 to: loginData.eMail,
-                from: "ckelly.tor@gmail.com",
+                from: process.env.SENDEMAIL,
                 subject: `Welcome aboard!`,
                 text: `Welcome aboard!`,
                 html: `Thank you for creating an account with SleepEz!!!`
