@@ -31,6 +31,9 @@ router.post('/userReg', (req, res)=>{
         errors.push(`Password must have at least one number`)
         errors.push(`Password Length between 8 & 16 characters`)
     }
+    if (req.body.userPassword != req.body.confirmPassword){
+        errors.push(`Passwords need to match!`)
+    }
     if (errors.length >=1){
         res.render('task/userReg',{
             error: errors
