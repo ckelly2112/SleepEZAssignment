@@ -1,7 +1,6 @@
 //Port Configured
 const PORT = process.env.PORT || 3000;
 //API Keys are hidden here
-const config = require('./config')
 
 //Import Modules
 const express = require("express");
@@ -23,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false}));
 
 app.use('/task', taskRoutes);
 //SendGrid API
-sgMail.setApiKey(config.sendGrid);
+sgMail.setApiKey(process.env.SENDGRID);
 
 
 //Cities temporarily stored here
@@ -37,7 +36,7 @@ app.set('view engine', 'handlebars');
 app.use(express.static('public'))
 
 //Mongoose db setup
-mongoose.connect(config.MongoDB, {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGO_DB, {useNewUrlParser: true, useUnifiedTopology: true})
 .then(()=>{
     console.log(`Connection to database successful`)    
 })
