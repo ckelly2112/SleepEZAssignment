@@ -9,6 +9,7 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const taskRoutes = require('./routes/task')
 const userRoutes = require('./routes/user')
+const genRoutes = require('./routes/general')
 
 require("dotenv").config({path:'./config/keys.env'});
 
@@ -20,6 +21,7 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false}));
 
 //Routes
+app.use('/', genRoutes);
 app.use('/task', taskRoutes);
 app.use('/user', userRoutes);
 
@@ -42,87 +44,61 @@ mongoose.connect(process.env.MONGO_DB, {useNewUrlParser: true, useUnifiedTopolog
     console.log(`ERROR: ${err}`)
 })
 
-//Login Schema
-// const Schema = mongoose.Schema;
-//     const loginSchema = new Schema({
-//         firstName : String,
-//         lastName: String,
-//         eMail:{
-//             type: String,
-//             unique: true
-//         } ,
-//         password: String,
-//         DOB: Date
-//     })
-
-
-//     const Register = mongoose.model('Register', loginSchema);
 
 // GET
-app.get('/', (req, res)=>{
-    res.render('home')
-})
-// app.get('/dashboard', (req, res)=>{
-//     res.render('dashboard')
+// app.get('/', (req, res)=>{
+//     res.render('home')
 // })
-app.get('/roomList', (req, res)=>{
-    if(result == "Toronto"){
-        res.render('roomList', {
-            Toronto: true,
-            city: result
-        })
-    } else if(result == "Montreal"){
-        res.render('roomList', {
-            Montreal: true,
-            city: result
-        })
-    }else if(result == "Vancouver"){
-        res.render('roomList', {
-            Vancouver: true,
-            city: result
-        })
-    }else if(result == "St. John's"){
-        res.render('roomList', {
-            StJohns: true,
-            city: result
-        })
-    } 
-    else
-    res.render('roomList', {
-        empty: true
-    })
-})
-
-// app.get('/userReg', (req, res)=>{
-//     res.render('userReg')
-// })
-// app.get('/login', (req, res)=>{
-//     res.render('login')
+// app.get('/roomList', (req, res)=>{
+//     if(result == "Toronto"){
+//         res.render('roomList', {
+//             Toronto: true,
+//             city: result
+//         })
+//     } else if(result == "Montreal"){
+//         res.render('task/roomList', {
+//             Montreal: true,
+//             city: result
+//         })
+//     }else if(result == "Vancouver"){
+//         res.render('roomList', {
+//             Vancouver: true,
+//             city: result
+//         })
+//     }else if(result == "St. John's"){
+//         res.render('roomList', {
+//             StJohns: true,
+//             city: result
+//         })
+//     } 
+//     else
+//     res.render('roomList', {
+//         empty: true
+//     })
 // })
 
-// POST
-app.post("/", (req, res)=>
-{
-    const errors = [];
-    if (req.body.checkInDate <= '2019-10-07'){
-        errors.push("You can not select a day in the past!");
-    }
-    if (req.body.checkOutDate <= req.body.checkInDate){
-        errors.push("You need to select a day AFTER your check in date");
-    }
-    if (req.body.numberOfGuests > 9 || req.body.numberOfGuests < 1){
-        errors.push("Invalid Number of Guests/Nine guest max")
-    }
-    if (errors.length >= 1){
-        res.render("home", {
-            error: errors,
-        })
-    } else{
-        result.pop();
-        result.push(`${req.body.searchCity}`);
-        res.redirect('/roomList')
-    }
-})
+// app.post("/", (req, res)=>
+// {
+//     const errors = [];
+//     if (req.body.checkInDate <= '2019-10-07'){
+//         errors.push("You can not select a day in the past!");
+//     }
+//     if (req.body.checkOutDate <= req.body.checkInDate){
+//         errors.push("You need to select a day AFTER your check in date");
+//     }
+//     if (req.body.numberOfGuests > 9 || req.body.numberOfGuests < 1){
+//         errors.push("Invalid Number of Guests/Nine guest max")
+//     }
+//     if (errors.length >= 1){
+//         res.render("home", {
+//             error: errors,
+//         })
+//     } else{
+//         result.pop();
+//         result.push(`${req.body.searchCity}`);
+//         res.redirect('/roomList')
+//     }
+// })
 
 app.post('/login', (req, res)=>{
     const errors = [];
@@ -140,73 +116,6 @@ app.post('/login', (req, res)=>{
         res.redirect('task/dashboard');
     }
 })
-
-// app.post('/userReg', (req, res)=>{
-    
-//     const validator = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
-//     const errors =[];
-//     if (req.body.userEmail == ""){
-//         errors.push("You must enter an Email")
-//     }
-//     if (req.body.firstName == ""){
-//         errors.push("You must enter your first name!")
-//     }
-//     if (req.body.lastName ==""){
-//         errors.push("Please provide a last name")
-//     }
-//     if (req.body.dateOfBirth >= '2001-10-07'){
-//         errors.push("Must be 18 or older to register!")
-//     }
-//     if (!validator.test(req.body.userPassword)){
-//         errors.push(`Rules are as follows:`)
-//         errors.push(`Password must have one lower case and one Upper case letter`)
-//         errors.push(`Password must have at least one number`)
-//         errors.push(`Password Length between 8 & 16 characters`)
-//     }
-//     if (errors.length >=1){
-//         res.render('userReg',{
-//             error: errors
-//         })
-//     } else{
-//         const loginData = {
-//             eMail: req.body.userEmail,
-//             firstName: req.body.firstName,
-//             lastName: req.body.lastName,
-//             password: req.body.userPassword,
-//             DOB: req.body.dateOfBirth
-//         }
-//         const saveLogin = new Register(loginData);
-//         saveLogin.save({validateBeforeSave: true})
-//         .then(()=>{
-//             console.log(`${loginData.firstName} Saved in the database!`)
-//             const email = {
-//                 to: loginData.eMail,
-//                 from: config.sendEmail,
-//                 subject: `Welcome aboard!`,
-//                 text: `Welcome aboard!`,
-//                 html: `Thank you for creating an account with SleepEz!!!`
-//             }
-//             sgMail.send(email)
-//             .then(()=>{
-//                 console.log('Message sent Successfully!')
-//             })
-//             .catch((err)=>{
-//                 console.log(err);
-//             })
-//             res.redirect('/dashboard');
-//         })
-//         .catch((err)=>{
-//             console.log(`Save failed because: ${err}`);
-//             errors.push("Email already in use!")
-//             res.render('userReg', {
-//                 error: errors
-//             })
-//         })
-        
-        
-//     }
-
-// })
 
 app.listen(PORT, ()=>{
     console.log(`Port ${PORT} now listening`)
