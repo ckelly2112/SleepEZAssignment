@@ -35,7 +35,7 @@ router.get('/roomList', (req, res)=>{
     })
 })
 
-router.post("/room", (req, res)=>
+router.post("/", (req, res)=>
 {
     const errors = [];
     if (req.body.checkInDate <= '2019-10-07'){
@@ -54,7 +54,7 @@ router.post("/room", (req, res)=>
     } else{
         result.pop();
         result.push(`${req.body.searchCity}`);
-        res.redirect('/task/roomList')
+        res.redirect('/roomList')
     }
 })
 module.exports = router;
