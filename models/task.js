@@ -23,6 +23,10 @@ const loginSchema = new Schema({
         type: Date,
         required: true
     },
+    Status: {
+        type: String,
+        default: "User"
+    }
 })
 
 loginSchema.pre("save", function(next){

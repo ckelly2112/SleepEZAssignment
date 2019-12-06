@@ -13,7 +13,7 @@ router.post('/login', (req, res)=>{
         email : req.body.userEmail,
         password : req.body.userPassword
     }
-    User.findOne({eMail:FormData.email})
+    User.findOne({eMail:loginInfo.email})
     .then(user=>{
         if (user==null){
             errors.push("Sorry your email was not found");

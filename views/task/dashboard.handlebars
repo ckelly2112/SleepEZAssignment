@@ -1,7 +1,13 @@
 <section class="dashBoard">
     <div class="backgroundImage" id="dashboardBackground"></div>
     <h1> Welcome!!!</h1>
+    {{#if user}}
     <p>
-        This page is currently under construction
+        Welcome {{user.firstName}}
     </p>
+    {{else}}
+    <p>
+        You shouldn't be here
+    </p>
+    {{/if}}
 </section>
