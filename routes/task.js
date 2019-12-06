@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../models/task');
+const auth = require("../middleware/auth")
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID);
 
@@ -64,7 +65,7 @@ router.post('/userReg', (req, res)=>{
             .catch((err)=>{
                 console.log(err);
             })
-            res.redirect('/task/dashboard');
+            res.redirect('/user/login');
         })
         .catch((err)=>{
             console.log(`Save failed because: ${err}`);

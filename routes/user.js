@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require("bcryptjs");
+const User = require("../models/task");
 
 router.get('/login', (req, res)=>{
     res.render('user/login')
@@ -7,19 +9,41 @@ router.get('/login', (req, res)=>{
 
 router.post('/login', (req, res)=>{
     const errors = [];
-    if (req.body.userEmail == ""){
-        errors.push(`You forgot to enter your email!`)
+    const loginInfo = {
+        email : req.body.userEmail,
+        password : req.body.userPassword
     }
-    if (req.body.userPassword == ""){
-        errors.push(`You didn't enter your password!`)
-    }
-    if (errors.length >=1){
-        res.render('login',{
-            error: errors
-        })
-    } else{
-        res.redirect('/task/dashboard');
-    }
+    User.findOne({eMail:FormData.email})
+    .then(user=>{
+        if (user==null){
+            errors.push("Sorry your email was not found");
+            res.render("user/login",{
+                error: errors
+            })
+        }
+        else{
+            bcrypt.compare(loginInfo.password, user.password)
+            .then(match=>{
+                if(match){
+                    req.session.userInfo=user;
+                    res.redirect("/task/dashboard")
+                }
+                else{
+                    errors.push("Sorry, your password does not match");
+                    res.render("user/login",{
+                        error: errors
+                    })
+                }
+            })
+            .catch(err=>console.log(err))
+        }
+    })
+    .catch(err=> console.log(err)) 
+})
+
+router.get("/logout", (req,res)=>{
+    req.session.destroy();
+    res.redirect("/user/login");
 })
 
 module.exports = router;
