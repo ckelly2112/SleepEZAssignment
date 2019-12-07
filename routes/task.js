@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Task = require('../models/task');
+const User = require('../models/user');
 const auth = require("../middleware/auth")
 const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID);
@@ -47,7 +47,7 @@ router.post('/userReg', (req, res)=>{
             password: req.body.userPassword,
             DOB: req.body.dateOfBirth
         }
-        const saveLogin = new Task(loginData);
+        const saveLogin = new User(loginData);
         saveLogin.save({validateBeforeSave: true})
         .then(()=>{
             console.log(`${loginData.firstName} Saved in the database!`)
@@ -85,7 +85,7 @@ router.get('/profile', auth, (req, res)=>{
 })
 
 router.get('/dashboard/:id', auth, (req, res)=>{
-    Task.findById(req.params.id)
+    User.findById(req.params.id)
     .then(task=>{ 
         if (task.Status == "Admin"){
         res.render('task/adminDashboard'),{

@@ -67,11 +67,18 @@ a:hover{
 {
     background-image: url(../img/mountains.jpg);
 }
-#dashboardBackground
+#profileBackground
 {
     background-image: url(../img/Calm.jpg);
 }
-
+#adminBackground
+{
+    background-image: url(../img/adminBack.jpg);
+}
+#userBackground
+{
+    background-image: url(../img/userBack.jpg);
+}
 /* MAIN HEADER DEFAULTS */
 header
 {
@@ -225,12 +232,19 @@ footer i
     text-align: center;
 }
 
-.dashBoard
+.profile
 {
     min-height: 90vh;
     max-height: 100%;
     position: relative;
 }
+.dashboard
+{
+    min-height: 90vh;
+    max-height: 100%;
+    position: relative;
+}
+
 /* Testimony */
 #testimony
 {
