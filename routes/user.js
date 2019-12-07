@@ -26,7 +26,7 @@ router.post('/login', (req, res)=>{
             .then(match=>{
                 if(match){
                     req.session.userInfo=user;
-                    res.redirect("/task/dashboard")
+                    res.redirect("/task/profile")
                 }
                 else{
                     errors.push("Sorry, your password does not match");

@@ -22,12 +22,12 @@ app.use(express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false}));
 
 //Sessions
-app.use(session({secret:process.env.SUPER_SECRET}));
+
+app.use(session({secret:process.env.SUPER_SECRET}))
 app.use((req,res,next)=>{
     res.locals.user= req.session.userInfo;
     next();
 })
-
 //Routes
 app.use('/', genRoutes);
 app.use('/task', taskRoutes);

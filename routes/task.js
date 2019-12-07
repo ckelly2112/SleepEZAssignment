@@ -80,7 +80,25 @@ router.post('/userReg', (req, res)=>{
 
 })
 
-router.get('/dashboard', (req, res)=>{
-    res.render('task/dashboard')
+router.get('/profile', auth, (req, res)=>{
+    res.render('user/profile')
 })
+
+router.get('/dashboard/:id', auth, (req, res)=>{
+    Task.findById(req.params.id)
+    .then(task=>{ 
+        if (task.Status == "Admin"){
+        res.render('task/adminDashboard'),{
+            userInfo: task
+        }}
+        else{
+            res.render(`task/dashboard`),{
+                userInfo: task
+            }
+        }
+    })
+    
+})
+
+
 module.exports = router;
