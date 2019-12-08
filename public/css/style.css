@@ -201,7 +201,12 @@ footer i
     padding-bottom: 1rem;
     padding-top: 1rem;
 }
-
+#deleteButton{
+    display: inline-block
+}
+#deleteRoomForm{
+    display:inline-block
+}
 
 /* USER REGISTRATION SETTINGS */
 

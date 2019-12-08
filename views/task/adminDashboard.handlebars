@@ -5,8 +5,12 @@
     <br>
     <a href="/task/addRoom" class="controlButton" id="addRoomButton">Add Room</a><br><br><br>
     {{#each room}}
+    <image height="100px" width="100px" src="/uploads/{{this.roomPicture}}"></image>
     <h2 id="roomTitle">{{this.roomTitle}}</h2>
     <a href="/task/editRoom/{{this._id}}" class="controlButton">Edit</a>
+    <form action="/task/delete/{{this._id}}?_method=DELETE" method="POST" id="deleteRoomForm">
+    <input type="submit" value="Remove" class="controlButton" id="deleteButton" data-id="{{this.id}}" data-title="{{this.title}}">
+    </form>
     <br><br>
     {{/each}}
 </section>

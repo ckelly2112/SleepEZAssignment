@@ -5,6 +5,7 @@ const Room = require('../models/task')
 const auth = require("../middleware/auth");
 const sgMail = require('@sendgrid/mail');
 const path = require("path");
+const fs = require("fs")
 sgMail.setApiKey(process.env.SENDGRID);
 
 
@@ -123,11 +124,29 @@ router.post('/addRoom',auth,(req,res)=>{
         roomLocation: req.body.roomLocation,
         createdBy: req.session.userInfo._id
     };
+    if(req.files == null || req.files.roomPicture.mimetype.indexOf("image")==-1){
+        errors.push("You must upload an image file for the room!");
+        res.render('task/addRoom',{
+            error:errors
+        })
+    }
     const addRoom = new Room(roomData);
     addRoom.save({validateBeforeSave: true})
-    .then(()=>{
-        console.log(`${roomData.roomTitle} Saved!`)
-        res.redirect(`/task/dashboard`)
+    .then((addRoom)=>{
+        console.log(req.files.roomPicture.name);
+        //renaming the room to include the room id:
+        req.files.roomPicture.name = `db_${addRoom._id}${path.parse(req.files.roomPicture.name).ext}`
+
+        req.files.roomPicture.mv(`public/uploads/${req.files.roomPicture.name}`)
+        .then(()=>{
+            Room.findByIdAndUpdate(addRoom._id, {
+                roomPicture:req.files.roomPicture.name
+            })
+            .then(()=>{
+                console.log(`${roomData.roomTitle} Saved!`)
+                res.redirect(`/task/dashboard`)
+            })
+        })
     })
     .catch(err=> {
         console.log(err)
@@ -179,6 +198,16 @@ router.put('/editRoom/:id',auth,(req,res)=>{
                 error:error
             })
         }) 
+    })
+})
+
+router.delete("/delete/:id", auth, (req, res)=>{
+
+    Room.findOneAndDelete({_id:req.params.id})
+    .then(room=>{
+        console.log(room.roomPicture)
+        fs.unlinkSync(`public/uploads/${room.roomPicture}`)
+        res.redirect("/task/dashboard")
     })
 })
 

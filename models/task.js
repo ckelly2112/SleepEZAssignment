@@ -25,7 +25,7 @@ const roomSchema = new Schema({
         type:String,
         required: true
     },
-    roomPic:{
+    roomPicture:{
         type: String
     }
 })
