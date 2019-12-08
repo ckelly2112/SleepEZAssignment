@@ -86,8 +86,8 @@ router.get('/profile', auth, (req, res)=>{
     res.render('user/profile')
 })
 
-router.get('/dashboard/:id', auth, (req, res)=>{
-    User.findById(req.params.id)
+router.get('/dashboard', auth, (req, res)=>{
+    User.findById(req.session.userInfo._id)
     .then(task=>{ 
         if (task.Status == "Admin"){
         res.render('task/adminDashboard'),{
@@ -121,7 +121,7 @@ router.post('/addRoom',auth,(req,res)=>{
     addRoom.save({validateBeforeSave: true})
     .then(()=>{
         console.log(`${roomData.roomTitle} Saved!`)
-        res.redirect(`user/profile`)
+        res.redirect(`/task/dashboard`)
     })
     .catch(err=> console.log(err))
 })
