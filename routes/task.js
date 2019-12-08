@@ -86,20 +86,25 @@ router.get('/profile', auth, (req, res)=>{
     res.render('user/profile')
 })
 
-router.get('/dashboard', auth, (req, res)=>{
+router.get('/dashboard', auth, (req, res) => {
     User.findById(req.session.userInfo._id)
-    .then(task=>{ 
-        if (task.Status == "Admin"){
-        res.render('task/adminDashboard'),{
-            userInfo: task
-        }}
-        else{
-            res.render(`task/dashboard`),{
-                userInfo: task
+        .then(task => {
+            if (task.Status == "Admin") {
+                Room.find({createdBy:req.session.userInfo._id})
+                    .then(room => {
+                        res.render('task/adminDashboard', {
+                            room: room,
+                        })
+                    })
+                    .catch(err=>{console.log(err)})
             }
-        }
-    })
-    
+            else {
+                res.render(`task/dashboard`), {
+                    userInfo: task
+                }
+            }
+        })
+
 })
 
 router.get('/addRoom',auth,(req,res)=>{
@@ -115,7 +120,8 @@ router.post('/addRoom',auth,(req,res)=>{
         roomTitle: req.body.roomTitle,
         roomPrice: req.body.roomPrice,
         roomDescription: req.body.roomDescription,
-        roomLocation: req.body.roomLocation
+        roomLocation: req.body.roomLocation,
+        createdBy: req.session.userInfo._id
     };
     const addRoom = new Room(roomData);
     addRoom.save({validateBeforeSave: true})
@@ -123,7 +129,57 @@ router.post('/addRoom',auth,(req,res)=>{
         console.log(`${roomData.roomTitle} Saved!`)
         res.redirect(`/task/dashboard`)
     })
+    .catch(err=> {
+        console.log(err)
+        errors.push("Something went wrong. Check the following:")
+        errors.push("Title is less than 25 characters")
+        errors.push("Price is above $0")
+        errors.push("Description is less than 250 characters")
+        res.render('task/addRoom',{
+            error:errors
+        })
+    })
+})
+
+router.get('/editRoom/:id',auth,(req,res)=>{
+    Room.findById(req.params.id)
+    .then(room=>{
+        if(room.createdBy == req.session.userInfo._id){
+            res.render('task/editRoom', {
+                roomData: room
+            })
+        }
+        else{
+            res.redirect('/user/login')
+        }
+    })
     .catch(err=> console.log(err))
+})
+
+router.put('/editRoom/:id',auth,(req,res)=>{
+    const error = [];
+    Room.findById(req.params.id)
+    .then(room=>{
+        room.roomTitle = req.body.roomTitle;
+        room.roomPrice = req.body.roomPrice;
+        room.roomDescription = req.body.roomDescription;
+        room.roomLocation = (req.body.roomLocation == "none")? room.roomLocation:req.body.roomLocation;
+        room.save()
+        .then(()=>{
+            res.redirect(`/task/dashboard`)
+        })
+        .catch(err=>{
+            console.log(err)
+            error.push("Something went wrong. Check the following:")
+            error.push("Title is less than 25 characters")
+            error.push("Price is above $0")
+            error.push("Description is less than 250 characters")
+            res.render('task/editRoom',{
+                roomData:room,
+                error:error
+            })
+        }) 
+    })
 })
 
 module.exports = router;

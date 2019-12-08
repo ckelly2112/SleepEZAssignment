@@ -7,6 +7,7 @@ const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const session = require("express-session")
 const fileUpload = require('express-fileupload')
+const methodOverride = require ("method-override")
 //Routes
 const taskRoutes = require('./routes/task')
 const userRoutes = require('./routes/user')
@@ -20,6 +21,8 @@ app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 //Use Public folder
 app.use(express.static('public'))
+//Method override
+app.use(methodOverride('_method'));
 //Use Body Parser
 app.use(bodyParser.urlencoded({ extended: false}));
 //Use file upload

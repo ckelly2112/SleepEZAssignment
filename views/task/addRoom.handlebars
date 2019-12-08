@@ -1,5 +1,8 @@
 <section class="addedit">
     <div class="backgroundImage" id="adminBackground"></div>
+    {{#each error}}
+    <div class="errorMessages">{{this}}</div>
+    {{/each}}
     <div class="formLayout" id="addForm">
         <h2>Add a Room</h2>
        <form method="POST" action="/task/addRoom" enctype="multipart/form-data">

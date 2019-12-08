@@ -4,11 +4,13 @@ const Schema = mongoose.Schema;
 const roomSchema = new Schema({
     roomTitle:{
         type:String,
-        required: true
+        required: true,
+        maxlength: 25
     },
     roomPrice:{
         type:Number,
-        default: 100.00
+        default: 100.00,
+        min: [0, "Can't be a negative number"]
     },
     roomDescription:{
         type:String,
@@ -19,6 +21,10 @@ const roomSchema = new Schema({
         type:String,
         required: true
     },
+    createdBy:{
+        type:String,
+        required: true
+    }
 })
 
 const Room = mongoose.model('Room', roomSchema);
