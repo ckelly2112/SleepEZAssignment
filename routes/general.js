@@ -11,8 +11,11 @@ router.get('/', (req, res)=>{
 router.get('/viewRooms', (req,res)=>{
     Room.find({roomLocation:result})
     .then(room=>{
+        let userID = "";
+        if (req.session.userInfo != null) userID = req.session.userInfo._id;
         res.render('general/viewRooms',{
-            rooms:room
+            rooms:room,
+            user:userID
         })
     })
 })

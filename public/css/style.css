@@ -235,6 +235,7 @@ footer i
     border-style: block;
     border-color: gold;
     border-width: 2px;
+    margin: 1rem;
 }
 .roomListing img
 {
