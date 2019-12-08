@@ -96,6 +96,10 @@ a:hover{
 {
     background-image: url(../img/userBack.jpg);
 }
+#roomBackground
+{
+    background-image: url(..img/Calm.jpg);
+}
 /* MAIN HEADER DEFAULTS */
 header
 {
@@ -227,7 +231,7 @@ footer i
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
-#room1 {
+.rooms {
     border-style: block;
     border-color: gold;
     border-width: 2px;
