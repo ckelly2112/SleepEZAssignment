@@ -26,7 +26,7 @@ const loginSchema = new Schema({
     Status: {
         type: String,
         default: "User"
-    }
+    },
 })
 
 loginSchema.pre("save", function(next){

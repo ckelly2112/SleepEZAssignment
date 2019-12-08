@@ -24,6 +24,9 @@ const roomSchema = new Schema({
     createdBy:{
         type:String,
         required: true
+    },
+    roomPic:{
+        type: String
     }
 })
 

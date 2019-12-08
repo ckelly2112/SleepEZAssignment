@@ -3,9 +3,10 @@
     <h1>Admin Dashboard</h1>
     <h2>{{user.firstName}} {{user.lastName}}</h2>
     <br>
-    <a href="/task/addRoom">Add</a><br>
+    <a href="/task/addRoom" class="controlButton" id="addRoomButton">Add Room</a><br><br><br>
     {{#each room}}
-    <h2>{{this.roomTitle}}</h2>
-    <a href="/task/editRoom/{{this._id}}">Edit</a>
+    <h2 id="roomTitle">{{this.roomTitle}}</h2>
+    <a href="/task/editRoom/{{this._id}}" class="controlButton">Edit</a>
+    <br><br>
     {{/each}}
 </section>

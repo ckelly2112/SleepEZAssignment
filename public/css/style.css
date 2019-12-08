@@ -31,6 +31,23 @@ a:hover{
     text-decoration: underline;
     color: brown;
 }
+.controlButton
+{
+    font-size: 14px;
+    font-weight: bold;
+    border: solid;
+    background-color: brown;
+}
+#addRoomButton{
+    font-size: 24px;
+}
+.controlButton:hover{
+    color:blue;
+}
+#roomTitle{
+    text-decoration: underline;
+    display: inline-block
+}
 /* Background images */
 .backgroundImage
 {
