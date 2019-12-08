@@ -1,0 +1,30 @@
+<section class="addedit">
+    <div class="backgroundImage" id="adminBackground"></div>
+    <div class="formLayout" id="addForm">
+        <h2>Add a Room</h2>
+       <form method="POST" action="/task/addRoom" enctype="multipart/form-data">
+       <label>Room Name:</label><br>
+       <input type="text" name="roomTitle">
+       <br><br>
+       <label>Price:</label><br>
+       <input type="number" name="roomPrice" step="0.01">
+       <br><br>
+       <label>Description:</label><br>
+       <textarea name="roomDescription" cols="30" rows="10" maxlength="250"></textarea>
+       <br><br>
+       <label>Location:</label><br>
+       <select name="roomLocation">
+                <option value="Toronto">Toronto</option>
+                <option value="Vancouver">Vancouver</option>
+                <option value="Montreal">Montreal</option>
+                <option value="St. John's">St. John's</option>
+            </select>
+        <br><br>
+        <label>Room Picture:</label>
+        <input type="file" name="roomPicture">
+        <br><br>
+        <input type="submit" value="Add Room">
+       </form>
+
+    </div>
+</section>

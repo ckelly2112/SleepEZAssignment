@@ -244,6 +244,12 @@ footer i
     max-height: 100%;
     position: relative;
 }
+.addedit
+{
+    min-height: 90vh;
+    max-height: 100%;
+    position: relative;
+}
 
 /* Testimony */
 #testimony

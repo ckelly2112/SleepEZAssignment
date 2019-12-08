@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const auth = require("../middleware/auth")
-const sgMail = require('@sendgrid/mail')
+const Room = require('../models/task')
+const auth = require("../middleware/auth");
+const sgMail = require('@sendgrid/mail');
+const path = require("path");
 sgMail.setApiKey(process.env.SENDGRID);
 
 
@@ -100,5 +102,28 @@ router.get('/dashboard/:id', auth, (req, res)=>{
     
 })
 
+router.get('/addRoom',auth,(req,res)=>{
+    if(req.session.userInfo.Status == "Admin"){
+        res.render('task/addRoom')
+    }
+})
+
+router.post('/addRoom',auth,(req,res)=>{
+    const errors = [];
+    
+    const roomData = {
+        roomTitle: req.body.roomTitle,
+        roomPrice: req.body.roomPrice,
+        roomDescription: req.body.roomDescription,
+        roomLocation: req.body.roomLocation
+    };
+    const addRoom = new Room(roomData);
+    addRoom.save({validateBeforeSave: true})
+    .then(()=>{
+        console.log(`${roomData.roomTitle} Saved!`)
+        res.redirect(`user/profile`)
+    })
+    .catch(err=> console.log(err))
+})
 
 module.exports = router;

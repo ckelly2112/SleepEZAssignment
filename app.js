@@ -6,6 +6,7 @@ const exphbs = require("express-handlebars");
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose");
 const session = require("express-session")
+const fileUpload = require('express-fileupload')
 //Routes
 const taskRoutes = require('./routes/task')
 const userRoutes = require('./routes/user')
@@ -17,9 +18,12 @@ require("dotenv").config({path:'./config/keys.env'});
 //Handlebars setup
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
-//Use Body Parser
+//Use Public folder
 app.use(express.static('public'))
+//Use Body Parser
 app.use(bodyParser.urlencoded({ extended: false}));
+//Use file upload
+app.use(fileUpload())
 
 //Sessions
 
