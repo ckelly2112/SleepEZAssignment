@@ -13,4 +13,13 @@
     </form>
     <br><br>
     {{/each}}
+  <h2>Rooms Booked:</h2>
+  <a href="/task/deleteBookings" class="controlButton">REMOVE ALL BOOKINGS</a>
+     {{#each bookings}}
+    <div class="rooms">
+        <img height="200px" width="200px"src="../uploads/{{this.roomPicture}}" alt="{{this.roomTitle}}">
+        <h4>{{this.roomTitle}}/{{this.roomLocation}}</h4>
+        <p>${{this.roomPrice}}/night</p>
+    </div>
+{{/each}}
 </section>

@@ -89,21 +89,43 @@ router.get('/profile', auth, (req, res)=>{
 
 router.get('/dashboard', auth, (req, res) => {
     User.findById(req.session.userInfo._id)
-        .then(task => {
-            if (task.Status == "Admin") {
-                Room.find({createdBy:req.session.userInfo._id})
-                    .then(room => {
-                        res.render('task/adminDashboard', {
-                            room: room,
+        .then(user => {
+            Room.find({_id:user.booking})
+            .then(bookings=>{
+
+                if (user.Status == "Admin") {
+                    Room.find({createdBy:req.session.userInfo._id})
+                        .then(room => {
+                            res.render('task/adminDashboard', {
+                                room: room,
+                                bookings: bookings
+                            })
                         })
-                    })
-                    .catch(err=>{console.log(err)})
-            }
-            else {
-                res.render(`task/dashboard`), {
-                    userInfo: task
+                        .catch(err=>{console.log(err)})
                 }
-            }
+                else {
+                    res.render(`task/dashboard`, {
+                        bookings: bookings
+                    })
+                }
+            })
+            .catch(err=> {
+                console.log(`Error happening here ${err}`)
+                if (user.Status == "Admin") {
+                    Room.find({createdBy:req.session.userInfo._id})
+                        .then(room => {
+                            res.render('task/adminDashboard', {
+                                room: room,
+                            })
+                        })
+                        .catch(err=>{console.log(err)})
+                }
+                else {
+                    res.render(`task/dashboard`), {
+                        userInfo: user,
+                    }
+                }
+            })
         })
 
 })
@@ -217,8 +239,7 @@ router.get("/book/:id",auth,(req,res)=>{
         User.findByIdAndUpdate(req.session.userInfo._id, {
            "$push": {booking: room._id}
         })
-        .then((user)=>{
-            user.booking.push(room._id)
+        .then(()=>{
             res.redirect('/task/dashboard')
         })
         .catch(err=> {
@@ -231,6 +252,15 @@ router.get("/book/:id",auth,(req,res)=>{
 
     })
     .catch(err=> console.log(`Couldn't find room because ${err}`))
+})
+
+router.get("/deleteBookings",auth,(req,res)=>{
+    User.findByIdAndUpdate(req.session.userInfo._id, {
+        booking: []
+    })
+    .then(()=>{
+        res.redirect('/task/dashboard')
+    })
 })
 
 module.exports = router;
