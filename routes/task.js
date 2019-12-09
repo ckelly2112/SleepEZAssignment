@@ -211,4 +211,26 @@ router.delete("/delete/:id", auth, (req, res)=>{
     })
 })
 
+router.get("/book/:id",auth,(req,res)=>{
+    Room.findById(req.params.id)
+    .then(room=>{
+        User.findByIdAndUpdate(req.session.userInfo._id, {
+           "$push": {booking: room._id}
+        })
+        .then((user)=>{
+            user.booking.push(room._id)
+            res.redirect('/task/dashboard')
+        })
+        .catch(err=> {
+            console.log(`update failed because: ${err}`)
+            res.render('general/viewRooms',
+            {
+                error:"Could not book. Might already be booked"
+            })
+        })
+
+    })
+    .catch(err=> console.log(`Couldn't find room because ${err}`))
+})
+
 module.exports = router;

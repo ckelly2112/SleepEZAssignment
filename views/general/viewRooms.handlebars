@@ -1,12 +1,20 @@
 
+{{#each error}}
+<div class="errorMessages">{{this}}</div>
+{{/each}}
 <section class="roomListing">
       <div class="backgroundImage" id="profileBackground"></div>
+
 {{#each rooms}}
     <div class="rooms">
         <img src="uploads/{{this.roomPicture}}" alt="{{this.roomTitle}}">
         <h4>{{this.roomTitle}}/{{this.roomLocation}}</h4>
         <p>${{this.roomPrice}}/night</p>
-        <a href="/task/book/{{user}}">Book</a>
+    {{#if ../user}}
+        <a href="/task/book/{{this._id}}">Book</a>
+    {{else}}
+        <a href="/user/login/">Sign in</a> to book!
+    {{/if}}
     </div>
 {{/each}}
 

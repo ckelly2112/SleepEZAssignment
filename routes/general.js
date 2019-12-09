@@ -7,15 +7,16 @@ const result =[];
 router.get('/', (req, res)=>{
     res.render('general/home')
 })
-
+router.use((req,res,next)=>{
+    res.locals.user= req.session.userInfo;
+    next();
+})
 router.get('/viewRooms', (req,res)=>{
     Room.find({roomLocation:result})
     .then(room=>{
-        let userID = "";
-        if (req.session.userInfo != null) userID = req.session.userInfo._id;
         res.render('general/viewRooms',{
             rooms:room,
-            user:userID
+            //user:req.session.userInfo._id
         })
     })
 })

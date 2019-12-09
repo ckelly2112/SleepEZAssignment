@@ -27,6 +27,10 @@ const loginSchema = new Schema({
         type: String,
         default: "User"
     },
+    booking: {
+        type: Array,
+        unique: true
+    }
 })
 
 loginSchema.pre("save", function(next){
