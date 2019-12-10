@@ -211,7 +211,7 @@ router.put('/editRoom/:id',auth,(req,res)=>{
                 res.redirect(`/task/dashboard`)
             }
             else{
-                fs.unlinkSync(`public/uploads/${editRoom.roomPicture}`)
+                fs.unlinkSync(`public/uploads/${room.roomPicture}`)
                 req.files.roomPicture.name = `db_${editRoom._id}${path.parse(req.files.roomPicture.name).ext}`
                 req.files.roomPicture.mv(`public/uploads/${req.files.roomPicture.name}`)
                 .then(()=>{
