@@ -218,9 +218,8 @@ router.put('/editRoom/:id',auth,(req,res)=>{
                     Room.findByIdAndUpdate(editRoom._id, {
                         roomPicture:req.files.roomPicture.name
                     })
-                    fs
                 })
-
+                res.redirect(`/task/dashboard`)
             }
         })
         .catch(err=>{
