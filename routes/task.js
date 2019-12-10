@@ -206,8 +206,22 @@ router.put('/editRoom/:id',auth,(req,res)=>{
         room.roomDescription = req.body.roomDescription;
         room.roomLocation = (req.body.roomLocation == "none")? room.roomLocation:req.body.roomLocation;
         room.save()
-        .then(()=>{
-            res.redirect(`/task/dashboard`)
+        .then((editRoom)=>{
+            if(req.files.roomPicture == null){
+                res.redirect(`/task/dashboard`)
+            }
+            else{
+                fs.unlinkSync(`public/uploads/${editRoom.roomPicture}`)
+                req.files.roomPicture.name = `db_${editRoom._id}${path.parse(req.files.roomPicture.name).ext}`
+                req.files.roomPicture.mv(`public/uploads/${req.files.roomPicture.name}`)
+                .then(()=>{
+                    Room.findByIdAndUpdate(editRoom._id, {
+                        roomPicture:req.files.roomPicture.name
+                    })
+                    fs
+                })
+
+            }
         })
         .catch(err=>{
             console.log(err)
