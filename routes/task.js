@@ -48,7 +48,7 @@ router.post('/userReg', (req, res)=>{
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             password: req.body.userPassword,
-            DOB: req.body.dateOfBirth
+            DOB: req.body.dateOfBirth, 
         }
         const saveLogin = new User(loginData);
         saveLogin.save({validateBeforeSave: true})

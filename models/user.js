@@ -29,14 +29,12 @@ const loginSchema = new Schema({
     },
     booking: {
         type: Array,
-        default: [],
-        unique: true
     }
 })
 
 loginSchema.pre("save", function(next){
 
-    bcrypt.genSalt(11)
+    bcrypt.genSalt(parseInt(process.env.BC_SALT))
     .then(salt=>{
         bcrypt.hash(this.password,salt)
         .then(hash=>{
