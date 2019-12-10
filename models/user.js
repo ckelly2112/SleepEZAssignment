@@ -29,6 +29,7 @@ const loginSchema = new Schema({
     },
     booking: {
         type: Array,
+        default: [],
         unique: true
     }
 })
